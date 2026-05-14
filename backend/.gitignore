@@ -1,3 +1,25 @@
 node_modules/
 .env
 .DS_Store
+
+frontend/node_modules/
+
+# Environment variables
+.env
+frontend/.env
+backend/.env
+
+# Build folders
+dist/
+build/
+frontend/dist/
+
+# Logs
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
