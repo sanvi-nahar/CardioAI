@@ -9,7 +9,7 @@ import {
 } from "../api/api";
 import { useAuth } from "../context/AuthContext";
 
-import VitalsChart from "../Components/VitalsChart";
+import VitalsChart from "../components/VitalsChart";
 import EditPatientModal from "../components/modals/EditPatientModal";
 
 // Reusable modal for text editing
