@@ -15,6 +15,10 @@ const options = {
     },
     servers: [
       {
+        url: '/api',
+        description: 'Current environment server (Dynamic)'
+      },
+      {
         url: 'http://localhost:5000/api',
         description: 'Development server'
       }

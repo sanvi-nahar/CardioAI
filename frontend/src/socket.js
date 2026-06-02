@@ -1,7 +1,14 @@
 import { io } from "socket.io-client";
 
 export const createSocketConnection = (token) => {
-  const socket = io(import.meta.env.VITE_API_BASE.replace('/api', ''), {
+  const apiBase = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+  
+  // Resolve base URL for Socket.IO connection
+  const socketUrl = apiBase.startsWith('http') 
+    ? apiBase.replace('/api', '') 
+    : window.location.origin;
+
+  const socket = io(socketUrl, {
     transports: ["websocket", "polling"],
     auth: { token },
   });
@@ -20,3 +27,4 @@ export const createSocketConnection = (token) => {
 
   return socket;
 };
+

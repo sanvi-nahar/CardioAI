@@ -50,12 +50,16 @@ const authLimiter = rateLimit({
 app.use('/api/', apiLimiter);
 
 // ---------- CORS CONFIG ----------
+const FRONTEND_URLS = process.env.FRONTEND_URL 
+  ? process.env.FRONTEND_URL.split(',').map(url => url.trim()) 
+  : [FRONTEND];
+
 app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin (mobile apps, curl requests)
       if (!origin) return callback(null, true);
-      if (origin === FRONTEND) return callback(null, true);
+      if (FRONTEND_URLS.includes(origin) || origin === "http://localhost:5173" || origin === FRONTEND) return callback(null, true);
       return callback(new Error("CORS BLOCKED: Origin not allowed"), false);
     },
     credentials: true,

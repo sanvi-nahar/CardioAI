@@ -5,10 +5,23 @@ const User = require('./src/models/User');
 
 async function run() {
   try {
-    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-    const exists = await User.findOne({ email: 'admin@hospital.com' });
-    if (exists) { console.log('Admin already exists:', exists._id.toString()); process.exit(0); }
-    const user = new User({ name: 'Admin', email: 'admin@hospital.com', password: 'pass123', role: 'admin' });
+    await mongoose.connect(process.env.MONGO_URI);
+    
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@hospital.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'pass123';
+    
+    const exists = await User.findOne({ email: adminEmail });
+    if (exists) { 
+      console.log('Admin already exists:', exists._id.toString()); 
+      process.exit(0); 
+    }
+    
+    const user = new User({ 
+      name: 'Admin', 
+      email: adminEmail, 
+      password: adminPassword, 
+      role: 'admin' 
+    });
     await user.save();
     console.log('Created admin:', user._id.toString());
     await mongoose.disconnect();
