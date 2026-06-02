@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Bell, LogOut, LogIn, UserPlus, ChevronDown } from "lucide-react";
+import { Bell, LogOut, LogIn, UserPlus, ChevronDown, Menu } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-export default function Header() {
+export default function Header({ onMenuToggle }) {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [openMenu, setOpenMenu] = useState(false);
@@ -15,12 +15,24 @@ export default function Header() {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200 flex justify-between items-center px-6 shadow-sm">
+    <header className="h-16 bg-white border-b border-slate-200 flex justify-between items-center px-4 md:px-6 shadow-sm">
 
-      {/* PAGE TITLE */}
-      <div>
-        <h2 className="font-bold text-slate-800 text-lg">AI Cardiac Monitoring</h2>
-        <p className="text-xs text-slate-500 -mt-0.5">Real-time clinical dashboard</p>
+      {/* LEFT SIDE - Toggle + Title */}
+      <div className="flex items-center gap-2">
+        {/* Hamburger Menu on Mobile */}
+        <button 
+          onClick={onMenuToggle}
+          className="p-1.5 hover:bg-slate-100 rounded-lg text-slate-600 md:hidden cursor-pointer"
+          aria-label="Toggle Navigation Sidebar"
+        >
+          <Menu className="h-6 w-6" />
+        </button>
+
+        {/* PAGE TITLE */}
+        <div>
+          <h2 className="font-bold text-slate-800 text-sm sm:text-lg whitespace-nowrap">AI Cardiac Monitoring</h2>
+          <p className="hidden sm:block text-xs text-slate-500 -mt-0.5">Real-time clinical dashboard</p>
+        </div>
       </div>
 
       {/* RIGHT SIDE SECTION */}

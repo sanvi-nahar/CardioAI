@@ -87,15 +87,15 @@ const AddPatient = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <h2 className="text-3xl font-bold text-slate-800 flex items-center gap-3">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 flex items-center gap-3">
           <UserPlus className="text-slate-700" />
           Add New Patient
         </h2>
         <p className="text-slate-600 mt-1">Register a new patient in the monitoring system</p>
       </div>
 
-      <div className="bg-white w-full max-w-4xl shadow-sm rounded-2xl p-8 border border-slate-200">
+      <div className="bg-white w-full max-w-4xl shadow-sm rounded-2xl p-5 sm:p-8 border border-slate-200">
 
         {successMsg && (
           <div className="bg-emerald-50 text-emerald-700 border border-emerald-200 p-4 rounded-xl mb-6 flex items-center gap-2">

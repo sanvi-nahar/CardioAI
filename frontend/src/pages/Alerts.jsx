@@ -121,10 +121,10 @@ export default function Alerts() {
 
   // Quick filter buttons
   const QuickFilters = () => (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-nowrap overflow-x-auto pb-2 md:pb-0 gap-2 max-w-full scrollbar-none w-full sm:w-auto">
       <button
         onClick={() => setSearchParams({})}
-        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition cursor-pointer ${
+        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition shrink-0 cursor-pointer ${
           !severityFilter && !statusFilter 
             ? 'bg-slate-900 text-white' 
             : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -134,7 +134,7 @@ export default function Alerts() {
       </button>
       <button
         onClick={() => setSearchParams({ severity: 'critical' })}
-        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1 cursor-pointer ${
+        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1 shrink-0 cursor-pointer ${
           severityFilter === 'critical' 
             ? 'bg-red-600 text-white' 
             : 'bg-red-50 text-red-600 hover:bg-red-100'
@@ -144,7 +144,7 @@ export default function Alerts() {
       </button>
       <button
         onClick={() => setSearchParams({ severity: 'warning' })}
-        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1 cursor-pointer ${
+        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1 shrink-0 cursor-pointer ${
           severityFilter === 'warning' 
             ? 'bg-amber-500 text-white' 
             : 'bg-amber-50 text-amber-600 hover:bg-amber-100'
@@ -154,7 +154,7 @@ export default function Alerts() {
       </button>
       <button
         onClick={() => setSearchParams({ status: 'pending' })}
-        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1 cursor-pointer ${
+        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1 shrink-0 cursor-pointer ${
           statusFilter === 'pending' 
             ? 'bg-blue-600 text-white' 
             : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
@@ -164,7 +164,7 @@ export default function Alerts() {
       </button>
       <button
         onClick={() => setSearchParams({ status: 'resolved' })}
-        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1 cursor-pointer ${
+        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition flex items-center gap-1 shrink-0 cursor-pointer ${
           statusFilter === 'resolved' 
             ? 'bg-green-600 text-white' 
             : 'bg-green-50 text-green-600 hover:bg-green-100'
@@ -206,11 +206,11 @@ export default function Alerts() {
             )}
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <QuickFilters />
           <button
             onClick={handleDeleteAll}
-            className="px-5 py-2.5 bg-red-50 text-red-600 font-medium rounded-xl hover:bg-red-100 border border-red-200 transition flex items-center gap-2 cursor-pointer"
+            className="px-5 py-2.5 bg-red-50 text-red-600 font-medium rounded-xl hover:bg-red-100 border border-red-200 transition flex items-center justify-center gap-2 cursor-pointer text-sm md:text-base w-full sm:w-auto"
           >
             <Trash2 size={18} />
             Clear History

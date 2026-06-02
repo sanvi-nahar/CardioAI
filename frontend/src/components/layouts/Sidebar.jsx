@@ -10,6 +10,7 @@ import {
   User,
   HeartPulse,
   UserPlus,
+  X,
 } from "lucide-react";
 
 const navGroups = [
@@ -53,7 +54,7 @@ const navGroups = [
   },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const { user } = useAuth();
 
   const filteredGroups = navGroups
@@ -66,9 +67,13 @@ export default function Sidebar() {
     .filter((group) => group.links.length > 0);
 
   return (
-    <aside className="w-64 h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col shadow-2xl">
+    <aside className={`
+      w-64 h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col shadow-2xl
+      fixed inset-y-0 left-0 z-50 transform md:static md:translate-x-0 transition-transform duration-300
+      ${isOpen ? "translate-x-0" : "-translate-x-full"}
+    `}>
       {/* Logo + Branding */}
-      <div className="p-5 border-b border-white/10">
+      <div className="p-5 border-b border-white/10 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="bg-gradient-to-br from-rose-500 to-rose-600 p-2.5 rounded-xl shadow-lg">
             <HeartPulse className="h-6 w-6 text-white" />
@@ -80,6 +85,15 @@ export default function Sidebar() {
             </p>
           </div>
         </div>
+
+        {/* Mobile Close Button */}
+        <button 
+          onClick={onClose}
+          className="p-1.5 text-slate-400 hover:text-white rounded-lg md:hidden hover:bg-white/10 cursor-pointer"
+          aria-label="Close Sidebar"
+        >
+          <X className="h-6 w-6" />
+        </button>
       </div>
 
       {/* Navigation Groups */}
@@ -94,6 +108,7 @@ export default function Sidebar() {
                 <NavLink
                   key={to}
                   to={to}
+                  onClick={onClose}
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       isActive
@@ -118,7 +133,7 @@ export default function Sidebar() {
             System Status:
           </p>
           <p className="text-sm font-medium text-emerald-400 flex items-center gap-2">
-            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+            <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
             Online
           </p>
         </div>

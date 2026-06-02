@@ -158,16 +158,16 @@ const Patients = () => {
       )}
 
       {/* Header */}
-      <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div>
-          <h2 className="text-3xl font-bold text-slate-800">Patient Registry</h2>
-          <p className="text-slate-600 mt-1">Search, filter, and manage all patients</p>
-          <p className="text-sm text-slate-500 mt-1">Showing {list.length} of {totalRecords} patients</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-800">Patient Registry</h2>
+          <p className="text-slate-600 mt-1 text-sm sm:text-base">Search, filter, and manage all patients</p>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">Showing {list.length} of {totalRecords} patients</p>
         </div>
 
         <button
           onClick={() => navigate("/add-patient")}
-          className="px-5 py-2.5 bg-slate-900 text-white rounded-xl hover:bg-slate-800 shadow-lg transition font-medium cursor-pointer"
+          className="px-5 py-2.5 bg-slate-900 text-white rounded-xl hover:bg-slate-800 shadow-lg transition font-medium cursor-pointer self-start sm:self-auto"
         >
           + Add Patient
         </button>

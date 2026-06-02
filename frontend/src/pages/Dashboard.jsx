@@ -90,14 +90,14 @@ export default function Dashboard() {
 
       {/* Header Card */}
       <div className="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-6 shadow-lg">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-white">Dashboard</h1>
-            <p className="text-slate-400 mt-1">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">Dashboard</h1>
+            <p className="text-slate-400 mt-1 text-sm sm:text-base">
               Real-time monitoring of patients & critical alerts.
             </p>
           </div>
-          <div className="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-xl border border-slate-700">
+          <div className="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-xl border border-slate-700 self-start sm:self-auto">
             <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
             <span className="text-sm text-emerald-400 font-medium">Live</span>
           </div>

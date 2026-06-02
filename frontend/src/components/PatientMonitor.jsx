@@ -265,7 +265,7 @@ const PatientMonitor = ({ patient, onClick }) => {
 
       {/* BOTTOM SECTION - Vitals Grid */}
       <div className="p-4">
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {/* Heart Rate */}
           <div className="bg-slate-800/60 rounded-xl p-3 text-center">
             <div className="flex items-center justify-center gap-1 mb-1">

@@ -15,8 +15,8 @@ import EditPatientModal from "../components/modals/EditPatientModal";
 // Reusable modal for text editing
 const TextEditModal = ({ title, value, onClose, onSave }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-2xl w-96 shadow-2xl space-y-4 border border-slate-200">
+    <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+      <div className="bg-white p-6 rounded-2xl w-full max-w-md shadow-2xl space-y-4 border border-slate-200 max-h-[90vh] overflow-y-auto">
         <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
 
         <textarea
@@ -296,11 +296,11 @@ const PatientDetail = () => {
       )}
 
       {/* ----------------------- HEADER ----------------------- */}
-      <div className="bg-white rounded-2xl shadow-sm p-8 border border-slate-200">
-        <div className="flex justify-between items-center">
+      <div className="bg-white rounded-2xl shadow-sm p-4 md:p-8 border border-slate-200">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h2 className="text-4xl font-bold text-slate-800">{patient.name}</h2>
-            <p className="mt-1 text-slate-500 text-lg">
+            <h2 className="text-2xl md:text-4xl font-bold text-slate-800">{patient.name}</h2>
+            <p className="mt-1 text-slate-500 text-sm md:text-lg">
               Bed <span className="font-semibold text-slate-700">{patient.bed}</span> •{" "}
               Age {patient.age} • {patient.gender} •{" "}
               <span className="font-semibold text-blue-600">{patient.ward}</span>
@@ -308,7 +308,7 @@ const PatientDetail = () => {
           </div>
 
           <span
-            className={`px-5 py-2 rounded-full font-semibold border text-lg ${getStatusColor(
+            className={`px-5 py-2 rounded-full font-semibold border text-base md:text-lg self-start sm:self-auto ${getStatusColor(
               patient.status
             )}`}
           >
@@ -317,23 +317,23 @@ const PatientDetail = () => {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-3 mt-6">
+        <div className="flex flex-wrap gap-3 mt-6">
           <button
             onClick={() => setEditing(true)}
-            className="px-6 py-2.5 bg-slate-900 text-white rounded-xl hover:bg-slate-800 shadow-lg font-medium transition"
+            className="px-4 md:px-6 py-2.5 bg-slate-900 text-white rounded-xl hover:bg-slate-800 shadow-lg font-medium transition text-sm md:text-base cursor-pointer"
           >
             Edit Patient
           </button>
 
           <button
             onClick={handleDelete}
-            className="px-6 py-2.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 border border-red-200 font-medium transition"
+            className="px-4 md:px-6 py-2.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 border border-red-200 font-medium transition text-sm md:text-base cursor-pointer"
           >
             Delete
           </button>
           <button
             onClick={handleViewSummary}
-            className="px-6 py-2.5 bg-purple-50 text-purple-600 rounded-xl hover:bg-purple-100 border border-purple-200 font-medium transition"
+            className="px-4 md:px-6 py-2.5 bg-purple-50 text-purple-600 rounded-xl hover:bg-purple-100 border border-purple-200 font-medium transition text-sm md:text-base cursor-pointer"
           >
             View Summary
           </button>
@@ -383,7 +383,7 @@ const PatientDetail = () => {
             </span>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-6">
             <div className="text-center p-4 bg-white rounded-xl border border-slate-200">
               <p className="text-sm text-slate-500 mb-1">NEWS2 Score</p>
               <p className={`text-3xl font-bold ${

@@ -95,7 +95,7 @@ export default function Login() {
       </div>
 
       {/* RIGHT SIDE - LOGIN FORM */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-slate-50">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-8 bg-slate-50">
         
         <div className="w-full max-w-md">
           
@@ -108,7 +108,7 @@ export default function Login() {
           </div>
 
           {/* LOGIN CARD */}
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-8">
+          <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-5 sm:p-8">
             
             {/* HEADER */}
             <div className="mb-8">
