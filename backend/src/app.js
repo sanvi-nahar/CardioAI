@@ -86,6 +86,15 @@ app.use("/api/alerts", require("./routes/alertRoutes"));
 app.use("/api/settings", require("./routes/settingsRoutes"));
 app.use("/api/ai-summary", require("./routes/aiRoutes"));
 
+// Root Welcome Route
+app.get("/", (req, res) => res.json({
+  success: true,
+  message: "Welcome to the CardioAI API",
+  status: "healthy",
+  docs: "/api-docs",
+  health: "/api/health"
+}));
+
 // Health Check
 app.get("/api/health", (req, res) => res.json({ 
   status: "ok", 
