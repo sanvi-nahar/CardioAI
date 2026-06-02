@@ -12,7 +12,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Please fill all fields" });
   }
 
-  const exists = await User.findOne({ email });
+  const exists = await User.findOne({ email: email.toLowerCase() });
   if (exists) {
     return res.status(400).json({ message: "Email already exists" });
   }

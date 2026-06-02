@@ -28,7 +28,7 @@ const authSchemas = {
         'string.min': 'Name must be at least 2 characters',
         'string.max': 'Name must not exceed 50 characters'
       }),
-    email: Joi.string().email().required()
+    email: Joi.string().email().required().trim()
       .messages({
         'string.email': 'Please provide a valid email',
         'string.empty': 'Email is required'
@@ -43,7 +43,7 @@ const authSchemas = {
   }),
 
   login: Joi.object({
-    email: Joi.string().email().required()
+    email: Joi.string().email().required().trim()
       .messages({
         'string.email': 'Please provide a valid email',
         'string.empty': 'Email is required'
@@ -56,7 +56,7 @@ const authSchemas = {
 
   updateProfile: Joi.object({
     name: Joi.string().min(2).max(50).optional(),
-    email: Joi.string().email().optional()
+    email: Joi.string().email().optional().trim()
       .messages({
         'string.email': 'Please provide a valid email'
       }),

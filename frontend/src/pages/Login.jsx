@@ -30,11 +30,16 @@ export default function Login() {
       const redirectPath = landingPage === "dashboard" ? "/" : `/${landingPage}`;
       navigate(redirectPath);
     } catch (error) {
-      setErr(
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        "Login failed"
-      );
+      if (error.response?.data?.details) {
+        const detailMsgs = error.response.data.details.map(d => d.message).join(", ");
+        setErr(detailMsgs);
+      } else {
+        setErr(
+          error.response?.data?.message ||
+          error.response?.data?.error ||
+          "Login failed"
+        );
+      }
     }
 
     setLoading(false);

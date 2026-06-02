@@ -29,12 +29,17 @@ export default function Register() {
       navigate("/login");
     } catch (error) {
       console.error("REGISTER ERROR:", error.response?.data || error.message || error);
-      setErr(
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        error.message ||
-        "Registration failed"
-      );
+      if (error.response?.data?.details) {
+        const detailMsgs = error.response.data.details.map(d => d.message).join(", ");
+        setErr(detailMsgs);
+      } else {
+        setErr(
+          error.response?.data?.message ||
+          error.response?.data?.error ||
+          error.message ||
+          "Registration failed"
+        );
+      }
     }
 
     setLoading(false);
