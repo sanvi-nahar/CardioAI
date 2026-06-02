@@ -67,7 +67,6 @@ patientSchema.index({ createdAt: -1 });
 patientSchema.index({ updatedAt: -1 });
 patientSchema.index({ ward: 1 });
 patientSchema.index({ status: 1 });
-patientSchema.index({ deviceId: 1 });
 patientSchema.index({ ward: 1, status: 1 });
 
 // Pre-save hook to limit vitals history
