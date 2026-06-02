@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { createPatient } from "../api/api";
 import { UserPlus, Activity, ClipboardList } from "lucide-react";
 
 const AddPatient = () => {
@@ -36,25 +36,7 @@ const AddPatient = () => {
     setErrorMsg("");
 
     try {
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        setErrorMsg("You are not logged in. Token missing.");
-        setLoading(false);
-        return;
-      }
-
-      const response = await axios.post(
-        "http://localhost:5000/api/patients",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
+      await createPatient(formData);
       setSuccessMsg("Patient added successfully!");
 
       setFormData({

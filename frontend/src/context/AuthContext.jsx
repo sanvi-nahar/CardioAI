@@ -72,17 +72,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (credentials) => {
     const data = await apiRegister(credentials);
-    const resolvedUser = data.user;
-
-    setToken(resolvedUser.token);
-    setUser(resolvedUser);
-    localStorage.setItem("token", resolvedUser.token);
-
-    if (socket) socket.disconnect();
-    const newSocket = createSocketConnection(resolvedUser.token);
-    setSocket(newSocket);
-
-    return resolvedUser;
+    return data;
   };
 
   const logout = () => {

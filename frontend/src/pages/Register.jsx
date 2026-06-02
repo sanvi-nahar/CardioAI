@@ -26,7 +26,7 @@ export default function Register() {
 
     try {
       await register(form);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error("REGISTER ERROR:", error.response?.data || error.message || error);
       setErr(
