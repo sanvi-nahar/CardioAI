@@ -4,7 +4,7 @@ const { predictPatientCondition } = require("../services/predictionService");
 
 exports.getAISummary = async (req, res) => {
   try {
-    const patients = await Patient.find();
+    const patients = await Patient.find().select("-vitals");
     const alerts = await Alert.find().sort({ createdAt: -1 }).limit(20);
 
     // 1️⃣ Critical Events
@@ -82,7 +82,7 @@ exports.getPatientPrediction = async (req, res) => {
 
 exports.getAllPatientsPredictions = async (req, res) => {
   try {
-    const patients = await Patient.find({});
+    const patients = await Patient.find({}).select({ name: 1, status: 1, vitals: { $slice: -20 } });
     
     const predictions = await Promise.all(
       patients.map(async (patient) => {

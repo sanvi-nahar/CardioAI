@@ -109,6 +109,7 @@ const getPatients = asyncHandler(async (req, res) => {
 
   const [patients, totalRecords] = await Promise.all([
     Patient.find(query)
+      .select("-vitals")
       .sort({ updatedAt: -1 })
       .skip(skip)
       .limit(limit),
@@ -245,7 +246,7 @@ const addVitals = asyncHandler(async (req, res) => {
    GET PATIENT
 ------------------------- */
 const getPatientById = asyncHandler(async (req, res) => {
-  const p = await Patient.findById(req.params.id);
+  const p = await Patient.findById(req.params.id).slice("vitals", -100);
   if (!p) {
     res.status(404);
     throw new Error("Patient not found");

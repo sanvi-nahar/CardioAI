@@ -178,9 +178,12 @@ async function simulateVitals(io) {
 
   setInterval(async () => {
     try {
-      const patients = await Patient.find();
+      // Fetch only the last 50 vitals to construct the socket payload efficiently
+      const patients = await Patient.find().select({
+        vitals: { $slice: -50 }
+      });
 
-      for (const p of patients) {
+      await Promise.all(patients.map(async (p) => {
         const currentProfile = p.simulationProfile || 'normal';
         
         const newProfile = determineNextProfile(currentProfile, p._id.toString());
@@ -205,10 +208,13 @@ async function simulateVitals(io) {
           temp: vitals.temp
         };
 
-        p.vitals.push({
+        const newVitalEntry = {
           timestamp: new Date(),
           ...vitalsSnapshot
-        });
+        };
+
+        // Push locally for the socket payload
+        p.vitals.push(newVitalEntry);
 
         const evaluation = evaluatePatientStatus(vitalsSnapshot);
         p.healthScore = evaluation.healthScore;
@@ -216,7 +222,28 @@ async function simulateVitals(io) {
 
         await processPatientState(p, evaluation, vitalsSnapshot, io);
 
-        await p.save();
+        // Perform atomic direct update to avoid sending/saving the whole vitals array
+        await Patient.updateOne(
+          { _id: p._id },
+          {
+            $set: {
+              heartRate: p.heartRate,
+              spo2: p.spo2,
+              temp: p.temp,
+              bp: p.bp,
+              healthScore: p.healthScore,
+              status: p.status,
+              statusStartTime: p.statusStartTime,
+              simulationProfile: p.simulationProfile
+            },
+            $push: {
+              vitals: {
+                $each: [newVitalEntry],
+                $slice: -1500
+              }
+            }
+          }
+        );
 
         io.emit("vitals-updated", {
           patientId: p._id,
@@ -234,7 +261,7 @@ async function simulateVitals(io) {
             vitals: p.vitals.slice(-50)
           }
         });
-      }
+      }));
     } catch (err) {
       console.error("Simulator error:", err.message);
     }
